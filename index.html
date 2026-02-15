@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Letter</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #fff5f7;
+  color: #5c0a1a;
+  overflow-x: hidden;
+}
+
+/* Floating hearts background */
+.heart-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.heart {
+  position: absolute;
+  color: #ff8fab;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0); opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(#ffe0e9, #fff5f7);
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  color: #d6336c;
+  margin-bottom: 10px;
+}
+
+.open-btn {
+  margin-top: 25px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 40px;
+  background: #ff8fab;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.open-btn:hover {
+  transform: scale(1.1);
+  background: #ff6b8a;
+}
+
+/* Envelope and Letter */
+.envelope {
+  position: relative;
+  width: 700px;
+  max-width: 90%;
+  margin: 50px auto 0;
+  height: 0;
+  perspective: 800px;
+}
+
+.envelope-front, .letter-content {
+  position: absolute;
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* Envelope front (flap) */
+.envelope-front {
+  height: 150px;
+  top: 0;
+  background: #ffc1cc;
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 1s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #c9184a;
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Letter content */
+.letter-content {
+  top: 150px;
+  padding: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  white-space: pre-wrap;
+}
+
+.letter-content.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Signature */
+.signature {
+  margin-top: 20px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  text-align: right;
+  color: #c9184a;
+}
+
+/* Pop hearts animation */
+.pop-heart {
+  position: fixed;
+  font-size: 30px;
+  animation: pop 1s ease forwards;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); opacity: 1; }
+  60% { transform: scale(1.6); }
+  100% { transform: scale(0); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Hidden Music -->
+<iframe id="music" width="0" height="0"
+src="https://www.youtube.com/embed/9lQPxlCMEcE?enablejsapi=1"
+allow="autoplay"></iframe>
+
+<div class="heart-bg" id="heart-bg"></div>
+
+<header>
+<h1>Happy Valentine's Day, Asawa Qouh! 🩷</h1>
+<p>To my favorite person, my nurse, and my life.</p>
+<button class="open-btn" onclick="openLetter()">Open My Letter 💌</button>
+</header>
+
+<div class="envelope" id="envelope">
+  <div class="envelope-front" id="envelope-front">💌</div>
+  <div class="letter-content" id="letter">
+Salamat sa pasensya love, alam kong unang paghinga ko palang sa mundo pambbwisit na karakas ko😆 Thank you so much sa pagsama sa akin sa lahat lahat mommy, sa pag intindi, at sa pagtitiwala sa mga panahon na wala na ako sa sarili ko 🥹 Ikaw na ang pinaka mabait na malditang nakilala ko hahaha grabe pag uunawa mo sa mga tao mahal, minsan ginagarote ko na sila sa isipan ko dahil ayoko sa lahat ay ang masaktan ka, kahit ano magagawa ko sa lahat, sa mundo, pag nagawa ka nilang kantiin. Anyways sorry sa emowziyonal na bungad mahal, sa lahat nang inis ko sa buhay ko kahit papaano hinding hindi ko ipagpapalit buhay na ito dahil nariyan ka palagi para sa atin😘 I feel sorry for my shortcomings mahal ko, pinapangako kong pagbubutihin ko pagbubuo sa sarili ko araw araw dahil gusto kong mabuo araw mo sa panahon na masaya man ito o hindi🤗 I love you my gwapa lami himos humot kaayo wife! I'm always proud of you my nurse zsang😘 thank you for being extraordinary you my baby
+
+<div class="signature">
+Nagmamahal,<br>Khrishna
+</div>
+  </div>
+</div>
+
+<script>
+/* Floating hearts background */
+const bg = document.getElementById("heart-bg");
+const icons = ["❤","💖","💕","💗","🌸"];
+
+function createHeart() {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (Math.random()*20 + 10) + "px";
+  h.style.animationDuration = (Math.random()*3 + 3) + "s";
+  bg.appendChild(h);
+  setTimeout(()=>h.remove(), 6000);
+}
+setInterval(createHeart, 300);
+
+/* Open letter function */
+function openLetter() {
+  const flap = document.getElementById("envelope-front");
+  const letter = document.getElementById("letter");
+
+  // Animate flap (open)
+  flap.style.transform = "rotateX(-180deg)";
+
+  // Show letter after flap opens
+  setTimeout(() => {
+    letter.classList.add("show");
+  }, 800);
+
+  // Start music
+  document.getElementById("music").src =
+    "https://www.youtube.com/embed/9lQPxlCMEcE?autoplay=1&loop=1&playlist=9lQPxlCMEcE";
+
+  // Pop hearts
+  for(let i=0;i<25;i++){
+    const h = document.createElement("div");
+    h.className = "pop-heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random()*100+"vw";
+    h.style.top = Math.random()*100+"vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1000);
+  }
+}
+</script>
+
+</body>
+</html>
