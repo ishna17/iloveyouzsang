@@ -41,7 +41,7 @@ body {
 /* Header */
 header {
   text-align: center;
-  padding: 80px 20px;
+  padding: 60px 20px;
   background: linear-gradient(#ffe0e9, #fff5f7);
 }
 
@@ -49,11 +49,11 @@ h1 {
   font-family: 'Dancing Script', cursive;
   font-size: 3rem;
   color: #d6336c;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .open-btn {
-  margin-top: 25px;
+  margin-top: 20px;
   padding: 14px 32px;
   border: none;
   border-radius: 40px;
@@ -89,7 +89,7 @@ h1 {
   backface-visibility: hidden;
 }
 
-/* Envelope front (flap) */
+/* Envelope flap */
 .envelope-front {
   height: 150px;
   top: 0;
@@ -100,7 +100,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: #c9184a;
   font-family: 'Dancing Script', cursive;
 }
@@ -108,12 +108,12 @@ h1 {
 /* Letter content */
 .letter-content {
   top: 150px;
-  padding: 30px;
+  padding: 40px 35px;
   opacity: 0;
   transform: translateY(20px);
   transition: all 1s ease;
-  line-height: 1.8;
-  font-size: 1.05rem;
+  line-height: 1.9;
+  font-size: 1.2rem;
   white-space: pre-wrap;
 }
 
@@ -124,9 +124,9 @@ h1 {
 
 /* Signature */
 .signature {
-  margin-top: 20px;
+  margin-top: 30px;
   font-family: 'Dancing Script', cursive;
-  font-size: 1.8rem;
+  font-size: 2rem;
   text-align: right;
   color: #c9184a;
 }
@@ -143,15 +143,26 @@ h1 {
   60% { transform: scale(1.6); }
   100% { transform: scale(0); opacity: 0; }
 }
+
+/* Audio player on side */
+.audio-player {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
 </style>
 </head>
 
 <body>
 
-<!-- Hidden Music -->
-<iframe id="music" width="0" height="0"
-src="https://www.youtube.com/embed/9lQPxlCMEcE?enablejsapi=1"
-allow="autoplay"></iframe>
+<!-- Music Player -->
+<div class="audio-player">
+  <audio id="bgMusic" controls loop>
+    <source src="YOUR-MUSIC-FILE.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
 
 <div class="heart-bg" id="heart-bg"></div>
 
@@ -194,17 +205,13 @@ function openLetter() {
   const flap = document.getElementById("envelope-front");
   const letter = document.getElementById("letter");
 
-  // Animate flap (open)
+  // Animate flap
   flap.style.transform = "rotateX(-180deg)";
 
   // Show letter after flap opens
   setTimeout(() => {
     letter.classList.add("show");
   }, 800);
-
-  // Start music
-  document.getElementById("music").src =
-    "https://www.youtube.com/embed/9lQPxlCMEcE?autoplay=1&loop=1&playlist=9lQPxlCMEcE";
 
   // Pop hearts
   for(let i=0;i<25;i++){
